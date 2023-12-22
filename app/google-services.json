@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790546513312",
+    "project_id": "kirim-pesan-apps",
+    "storage_bucket": "kirim-pesan-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790546513312:android:c287506a945a6b3eadf8c5",
+        "android_client_info": {
+          "package_name": "com.example.kirimpesanapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH2QUb68Z9b19XbaGE2CrgaJelDdh3xFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
