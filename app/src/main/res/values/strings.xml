@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kirim Pesan App</string>
+    <string name="welcome_app">Welcome to KirimPesan App</string>
+    <string name="desc_welcome">For those of you who are lazy about typing numbers one by one, you can try using this feature. Just snap a photo in the application or take it from your cellphone gallery, after that you can copy the number or go directly to WhatsApp.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="signIn">sign In</string>
 </resources>
