@@ -1,5 +1,6 @@
 package com.example.kirimpesanapp.view
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
@@ -28,6 +29,7 @@ class SignUpActivity : AppCompatActivity() {
             }
             btnSignUp.setOnClickListener {
                 Toast.makeText(this@SignUpActivity, "Sign Up", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@SignUpActivity, BottomNavigationActivity::class.java))
             }
             btnSignUpGoogle.setOnClickListener {
                 Toast.makeText(this@SignUpActivity, "Sign Up Google", Toast.LENGTH_SHORT).show()
