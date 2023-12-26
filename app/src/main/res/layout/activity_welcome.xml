@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.WelcomeActivity">
+    tools:context=".view.WelcomeActivity"
+    android:id="@+id/cl_welcome">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -61,36 +62,36 @@
             android:id="@+id/btn_sign_up"
             android:layout_width="148dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary"
             android:text="@string/sign_up"
-            android:layout_marginEnd="20dp"
             android:textColor="@color/secondary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sign_in"
             android:layout_width="148dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="20dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/white"
-            app:strokeColor="@color/grey"
-            app:strokeWidth="1dp"
             android:text="@string/signIn"
-            android:textColor="@color/secondary" />
+            android:textColor="@color/secondary"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sign_in_dark"
             android:layout_width="148dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="20dp"
-            android:backgroundTint="@color/black"
-            app:strokeColor="@color/primary"
-            android:visibility="gone"
-            app:strokeWidth="1dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark"
             android:text="@string/signIn"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp" />
 
     </LinearLayout>
 
