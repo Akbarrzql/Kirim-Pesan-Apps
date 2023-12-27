@@ -17,5 +17,6 @@
     <string name="profile">Profile</string>
     <string name="desc_menu">For those of you who are lazy about typing numbers one by one, you can try using this feature. Just snap a photo in the application or take it from your cellphone gallery, after that you can copy the number or go directly to WhatsApp.</string>
     <string name="tiitle_photo">Take a Photo</string>
-    <string name="tittle_galery">choose_photo</string>
+    <string name="tittle_galery">Choose Photo</string>
+    <string name="delete">Delete</string>
 </resources>
