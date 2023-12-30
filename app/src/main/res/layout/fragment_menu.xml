@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -20,8 +22,7 @@
             android:textAlignment="textStart"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="42dp"/>
+            android:layout_marginTop="30dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             <ImageView
                 android:id="@+id/iv_info"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/head_menu_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
 
             <TextView
                 android:id="@+id/tv_menu"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:text="@string/desc_menu"
                 android:textAlignment="textStart"
@@ -55,8 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="38dp"
-            android:layout_marginEnd="38dp"
             android:layout_marginTop="24dp"
             android:padding="4dp">
             
@@ -70,12 +69,12 @@
                 app:cardBackgroundColor="@color/transparent"
                 app:cardElevation="0dp"
                 android:background="@drawable/bg_button_stroke">
-                
+
                 <FrameLayout
                     android:id="@+id/fl_camera"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_cardview"/>
+                    android:background="@drawable/bg_cardview" />
 
                 <ImageView
                     android:layout_width="64dp"
@@ -113,9 +112,9 @@
                     android:background="@drawable/bg_cardview"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/choose_photo"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/gallery"
                     android:layout_gravity="center"/>
 
                 <TextView

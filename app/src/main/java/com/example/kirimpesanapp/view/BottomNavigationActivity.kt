@@ -27,7 +27,6 @@ class BottomNavigationActivity : AppCompatActivity() {
                 R.id.menu->setCurrentFragment(MenuFragment())
                 R.id.history->setCurrentFragment(HistoryFragment())
                 R.id.profile->setCurrentFragment(ProfileFragment())
-
             }
             true
         }

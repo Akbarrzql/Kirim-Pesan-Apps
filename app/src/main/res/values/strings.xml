@@ -19,4 +19,11 @@
     <string name="tiitle_photo">Take a Photo</string>
     <string name="tittle_galery">Choose Photo</string>
     <string name="delete">Delete</string>
+    <string name="name">Jhon Doe</string>
+    <string name="show_profile">Show Profile</string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="save">Save</string>
 </resources>
