@@ -20,6 +20,7 @@ import com.example.kirimpesanapp.databinding.ActivityDetailRecognitionBinding
 import com.example.kirimpesanapp.preferences.ThemePreferences
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.utils.setProgressDialog
+import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
 import com.google.mlkit.vision.text.TextRecognition
@@ -31,6 +32,7 @@ class DetailRecognitionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailRecognitionBinding
     private lateinit var themeViewModel: MainViewModel
+    private lateinit var textRecognitionViewModel: DataRecognitionViewModel
 
     //text recognizer
     private var imageUri: Uri? = null
@@ -46,6 +48,7 @@ class DetailRecognitionActivity : AppCompatActivity() {
         val pref = ThemePreferences.getInstance(application.dataStore)
         val viewModelFactory = ViewModelFactory(pref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        textRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
 
         //init text recognizer
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
@@ -116,11 +119,25 @@ class DetailRecognitionActivity : AppCompatActivity() {
 
                 val formattedText = extractPhoneNumber(resultText)
                 binding.tvTitle.text = formattedText
+
+                if (binding.tvTitle.text == "No phone number found"){
+                    binding.cvWa.visibility = View.GONE
+                }else{
+                    binding.cvWa.visibility = View.VISIBLE
+                    insertToDatabase(formattedText)
+                }
             }
             .addOnFailureListener { e ->
                 dialog.dismiss()
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun insertToDatabase(formattedText: String) {
+        val date = java.text.SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.getDefault()).format(java.util.Date())
+        val imageUri = imageUri.toString()
+        val dataRecognition = com.example.kirimpesanapp.data.model.DataRecognition(0, formattedText, date, imageUri)
+        textRecognitionViewModel.insertDataRecognition(dataRecognition)
     }
 
     private fun extractPhoneNumber(fullText: String): String {
@@ -192,7 +209,6 @@ class DetailRecognitionActivity : AppCompatActivity() {
                 clDetailRecognition.setBackgroundColor(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.dark))
                 mtDetailHistory.setBackgroundColor(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.dark))
                 mtDetailHistory.navigationIcon?.setTint(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.white))
-                mtDetailHistory.menu.getItem(0).icon?.setTint(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.white))
                 ivClock.setColorFilter(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.grey_light))
                 tvDate.setTextColor(ContextCompat.getColor(this@DetailRecognitionActivity, R.color.grey_light))
             }

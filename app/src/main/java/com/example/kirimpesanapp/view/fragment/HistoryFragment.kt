@@ -1,19 +1,18 @@
 package com.example.kirimpesanapp.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.FragmentHistoryBinding
-import com.example.kirimpesanapp.databinding.FragmentMenuBinding
 import com.example.kirimpesanapp.preferences.ThemePreferences
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.view.adapter.HistoryAdapter
+import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
 
@@ -23,6 +22,8 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var themeViewModel: MainViewModel
+    private lateinit var dataRecognitionViewModel: DataRecognitionViewModel
+    private lateinit var adapter: HistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +40,19 @@ class HistoryFragment : Fragment() {
         val viewModelFactory = ViewModelFactory(pref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
+        setUI()
         setRecyclerView()
         settingTheme()
+    }
+
+    private fun setUI() {
+        val isNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
+
+        if (isNightMode){
+            binding.clHistory.setBackgroundResource(com.example.kirimpesanapp.R.color.dark)
+        }else {
+            binding.clHistory.setBackgroundResource(com.example.kirimpesanapp.R.color.white)
+        }
     }
 
     private fun settingTheme() {
@@ -54,10 +66,25 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        //set adapter to recyclerview
-        binding.rvHistory.adapter = HistoryAdapter()
-        binding.rvHistory.setHasFixedSize(true)
-        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
-
+        val recyclerView = binding.rvHistory
+        adapter = HistoryAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        setupViewModel()
     }
+
+    private fun setupViewModel() {
+        dataRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
+        dataRecognitionViewModel.readAllData.observe(viewLifecycleOwner) { dataRecognition ->
+            if (dataRecognition.isNotEmpty()) {
+                adapter.setData(dataRecognition)
+                binding.llEmptyHistory.visibility = View.GONE
+                binding.rvHistory.visibility = View.VISIBLE
+            } else {
+                binding.llEmptyHistory.visibility = View.VISIBLE
+                binding.rvHistory.visibility = View.GONE
+            }
+        }
+    }
+
 }

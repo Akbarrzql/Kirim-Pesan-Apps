@@ -31,4 +31,5 @@
     <string name="welcome_app">Kirim Pesan App</string>
     <string name="copy">Berhasil disalin</string>
     <string name="tittle_dialog">Mohon Tunggu</string>
+    <string name="empty_history">Tidak ada riwayat</string>
 </resources>
