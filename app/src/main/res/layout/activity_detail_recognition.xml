@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_detail_recognition"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.DetailHistoryActivity"
     android:background="@color/white"
-    android:id="@+id/cl_detail_history">
+    tools:context=".view.DetailRecognitionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar"
@@ -23,9 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:navigationIcon="@drawable/baseline_arrow_back_24"
-            app:menu="@menu/menu_detail_history"
-            />
+            app:navigationIcon="@drawable/baseline_arrow_back_24" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,21 +37,31 @@
         android:scaleType="centerCrop"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
+        android:backgroundTint="@color/grey_bg"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageView
-            android:id="@+id/iv_detail_history"
+            android:id="@+id/iv_detail_recognition"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background" />
+             />
+
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fi_rr_camera"
+            />
 
     </androidx.cardview.widget.CardView>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,18 +75,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp">
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="24dp"
-                android:text="081122334455"
                 android:layout_gravity="center"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:text="-"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -86,15 +94,15 @@
                 android:id="@+id/cv_wa"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:cardCornerRadius="5dp"
                 android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/green">
+                android:backgroundTint="@color/green"
+                app:cardCornerRadius="5dp">
 
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_twotone_whatsapp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_twotone_whatsapp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -102,14 +110,14 @@
                 android:id="@+id/cv_copy"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:cardCornerRadius="5dp"
-                android:backgroundTint="@color/grey">
+                android:backgroundTint="@color/grey"
+                app:cardCornerRadius="5dp">
 
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/solar_copy_outline__1_"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/solar_copy_outline__1_" />
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -119,15 +127,15 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -143,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                android:text="12 Dec 2023 10:00"
+                android:text=""
                 android:textColor="@color/grey_hint"
                 android:textSize="12sp" />
 

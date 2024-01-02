@@ -44,7 +44,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun settingTheme() {
-        themeViewModel.getThemeSettings().observe(this) { isLightModeActive: Boolean ->
+        themeViewModel.getThemeSettings().observe(viewLifecycleOwner) { isLightModeActive: Boolean ->
             if (isLightModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {

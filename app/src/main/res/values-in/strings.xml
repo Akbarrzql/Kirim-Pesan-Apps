@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kirim Pesan App</string>
+    <string name="desc_welcome">Bagi Anda yang malas mengetikkan angka satu per satu, bisa mencoba menggunakan fitur ini. Cukup jepret foto yang ada di aplikasi atau ambil dari galeri ponsel, setelah itu kamu bisa copy nomornya atau langsung ke WhatsApp.</string>
+    <string name="sign_up">Daftar</string>
+    <string name="signIn">Masuk</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="login_by_google">Masuk dengan Google</string>
+    <string name="desc_signIn">Masukkan Akun Anda</string>
+    <string name="desc_signUp">Buat akun anda</string>
+    <string name="menu">Beranda</string>
+    <string name="history">Riwayat</string>
+    <string name="profile">Profil</string>
+    <string name="desc_menu">Bagi Anda yang malas mengetikkan angka satu per satu, bisa mencoba menggunakan fitur ini. Cukup jepret foto yang ada di aplikasi atau ambil dari galeri ponsel, setelah itu kamu bisa copy nomornya atau langsung ke WhatsApp.</string>
+    <string name="tiitle_photo">Ambil Foto</string>
+    <string name="tittle_galery">Pilih foto</string>
+    <string name="delete">Hapus</string>
+    <string name="show_profile">Lihat Profil</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="your_name">Nama Anda</string>
+    <string name="your_email">Email Anda</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="please_wait">Sedang menganalisa teks</string>
+    <string name="no_image">Tidak ada gambar</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_message">Anda yakin akan keluar?</string>
+    <string name="language">Pengaturan Bahasa</string>
+    <string name="welcome_app">Kirim Pesan App</string>
+    <string name="copy">Berhasil disalin</string>
+    <string name="tittle_dialog">Mohon Tunggu</string>
+</resources>

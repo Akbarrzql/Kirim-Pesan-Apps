@@ -2,6 +2,7 @@ package com.example.kirimpesanapp.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -73,16 +73,19 @@ class ProfileFragment : Fragment() {
             }
             logout.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Logout")
-                    .setMessage("Are you sure want to logout?")
-                    .setNegativeButton("Cancel") { dialog, _ ->
+                    .setTitle(R.string.logout)
+                    .setMessage(R.string.logout_message)
+                    .setNegativeButton(R.string.cancel) { dialog, _ ->
                         dialog.dismiss()
                     }
-                    .setPositiveButton("Logout") { _, _ ->
+                    .setPositiveButton(R.string.logout) { _, _ ->
                         startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                         requireActivity().finish()
                     }
                     .show()
+            }
+            language.setOnClickListener {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
             }
         }
     }

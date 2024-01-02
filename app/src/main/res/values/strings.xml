@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Kirim Pesan App</string>
-    <string name="welcome_app">Welcome to KirimPesan App</string>
+    <string name="app_name" translatable="false">Kirim Pesan App</string>
     <string name="desc_welcome">For those of you who are lazy about typing numbers one by one, you can try using this feature. Just snap a photo in the application or take it from your cellphone gallery, after that you can copy the number or go directly to WhatsApp.</string>
     <string name="sign_up">Sign Up</string>
     <string name="signIn">sign In</string>
@@ -11,7 +10,7 @@
     <string name="desc_signIn">Enter Your Account</string>
     <string name="desc_signUp">Create Your Account</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="menu">Menu</string>
     <string name="history">History</string>
     <string name="profile">Profile</string>
@@ -19,11 +18,24 @@
     <string name="tiitle_photo">Take a Photo</string>
     <string name="tittle_galery">Choose Photo</string>
     <string name="delete">Delete</string>
-    <string name="name">Jhon Doe</string>
+    <string name="name" translatable="false">Jhon Doe</string>
     <string name="show_profile">Show Profile</string>
-    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="help_support" translatable="false"><![CDATA[Help & Support]]></string>
     <string name="dark_mode">Dark Mode</string>
     <string name="your_name">Your Name</string>
     <string name="your_email">Your Email</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_wait">Is Recognizing Text</string>
+    <string name="no_image">Image not found</string>
+    <string name="regex1" translatable="false">\\+(\\d{2})?(\\d{10,12})</string>
+    <string name="regex2" translatable="false">0?(\\d{9,12})</string>
+    <string name="regex_3" translatable="false">0?(\\d{4})[-\\s]?(\\d{4})[-\\s]?(\\d{4})</string>
+    <string name="regex_4" translatable="false">\\+(\\d{2})?[-\\s]?(\\d{3})[-\\s]?(\\d{4})[-\\s]?(\\d{4})</string>
+    <string name="logout">Logout</string>
+    <string name="logout_message">Are you sure want to logout?</string>
+    <string name="language">Language Setting</string>
+    <string name="welcome_app">Kirim Pesan App</string>
+    <string name="copy">Copied successfully</string>
+    <string name="tittle_dialog">Please Wait</string>
 </resources>

@@ -164,6 +164,51 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="4dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_language"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardElevation="0dp"
+                android:backgroundTint="@color/primary"
+                app:cardCornerRadius="6dp">
+
+                <ImageView
+                    android:padding="2dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/outline_translate_24"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:text="@string/language"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_language_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/dark_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
