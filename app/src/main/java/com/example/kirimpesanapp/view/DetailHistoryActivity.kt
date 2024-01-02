@@ -3,21 +3,42 @@ package com.example.kirimpesanapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivityDetailHistoryBinding
+import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.dataStore
+import com.example.kirimpesanapp.viewmodel.MainViewModel
+import com.example.kirimpesanapp.viewmodel.ViewModelFactory
 
 class DetailHistoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailHistoryBinding
+    private lateinit var themeViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUI()
+        val pref = ThemePreferences.getInstance(application.dataStore)
+        val viewModelFactory = ViewModelFactory(pref)
+        themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
+        setUI()
+        settingTheme()
+    }
+
+    private fun settingTheme() {
+        themeViewModel.getThemeSettings().observe(this) { isLightModeActive: Boolean ->
+            if (isLightModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     private fun setUI() {

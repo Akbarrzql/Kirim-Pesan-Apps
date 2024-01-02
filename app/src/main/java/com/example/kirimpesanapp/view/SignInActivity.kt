@@ -5,21 +5,43 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivitySignInBinding
+import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.dataStore
+import com.example.kirimpesanapp.viewmodel.MainViewModel
+import com.example.kirimpesanapp.viewmodel.ViewModelFactory
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
+    private lateinit var themeViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val pref = ThemePreferences.getInstance(application.dataStore)
+        val viewModelFactory = ViewModelFactory(pref)
+        themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
         setUi()
         onClick()
+        settingTheme()
+    }
+
+    private fun settingTheme() {
+        themeViewModel.getThemeSettings().observe(this) { isLightModeActive: Boolean ->
+            if (isLightModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     private fun onClick() {

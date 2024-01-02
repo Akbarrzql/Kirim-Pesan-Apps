@@ -6,10 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.FragmentProfileFragmentBinding
+import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.view.ShowProfileActivity
+import com.example.kirimpesanapp.view.WelcomeActivity
+import com.example.kirimpesanapp.viewmodel.ThemeViewModel
+import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ProfileFragment : Fragment() {
 
@@ -19,7 +28,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,6 +39,28 @@ class ProfileFragment : Fragment() {
 
         setUI()
         onClick()
+        themePreferences()
+    }
+
+    private fun themePreferences() {
+        val pref = ThemePreferences.getInstance(requireContext().dataStore)
+        val mainViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(pref)
+        )[ThemeViewModel::class.java]
+        mainViewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.switchDarkMode.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.switchDarkMode.isChecked = false
+            }
+        }
+
+        binding.switchDarkMode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            mainViewModel.saveThemeSetting(isChecked)
+        }
     }
 
     private fun onClick() {
@@ -39,6 +70,19 @@ class ProfileFragment : Fragment() {
             }
             helpSupport.setOnClickListener {
                 Toast.makeText(requireContext(), "Help & Support \n(Comming Soon)", Toast.LENGTH_SHORT).show()
+            }
+            logout.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Logout")
+                    .setMessage("Are you sure want to logout?")
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("Logout") { _, _ ->
+                        startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                        requireActivity().finish()
+                    }
+                    .show()
             }
         }
     }
