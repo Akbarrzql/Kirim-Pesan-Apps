@@ -3,22 +3,45 @@ package com.example.kirimpesanapp.view
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.example.kirimpesanapp.BuildConfig
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivitySignUpBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
+import com.example.kirimpesanapp.viewmodel.AuthViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
+import com.example.kirimpesanapp.viewmodel.ThemeViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var themeViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var authViewModel: AuthViewModel
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,21 +49,55 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = ThemePreferences.getInstance(application.dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
-        themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        val authPref = AuthPreferences.getInstance(application.authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        authViewModel = ViewModelProvider(this, viewModelFactory)[AuthViewModel::class.java]
+
+
+        auth = Firebase.auth
 
         onClick()
         setUi()
         settingTheme()
+        googleSignIn()
     }
 
     private fun settingTheme() {
-        themeViewModel.getThemeSettings().observe(this) { isLightModeActive: Boolean ->
+        mainViewModel.getThemeSettings().observe(this) { isLightModeActive: Boolean ->
             if (isLightModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
+        }
+    }
+
+    private fun googleSignIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.web_client_id)
+            .requestEmail()
+            .build()
+
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        binding.btnSignUpGoogle.setOnClickListener {
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent, 100)
+        }
+
+        // Initialize firebase auth
+        firebaseAuth = FirebaseAuth.getInstance()
+        // Initialize firebase user
+        val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
+        // Check condition
+        if (firebaseUser != null) {
+            // When user already sign in redirect to profile activity
+            startActivity(
+                Intent(
+                    this@SignUpActivity, BottomNavigationActivity::class.java
+                ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
         }
     }
 
@@ -50,11 +107,118 @@ class SignUpActivity : AppCompatActivity() {
                 onBackPressedDispatcher.onBackPressed()
             }
             btnSignUp.setOnClickListener {
-                Toast.makeText(this@SignUpActivity, "Sign Up", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@SignUpActivity, BottomNavigationActivity::class.java))
+                registerUser()
             }
-            btnSignUpGoogle.setOnClickListener {
-                Toast.makeText(this@SignUpActivity, "Sign Up Google", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun registerUser() {
+        val user = Firebase.auth.currentUser
+
+        val email = binding.etEmailSignUp.text.toString()
+        val password = binding.etPasswordSignUp.text.toString()
+
+        when {
+            email.isEmpty() -> {
+                binding.etEmailSignUp.error = "Email is required"
+                binding.etEmailSignUp.requestFocus()
+            }
+            password.isEmpty() -> {
+                binding.etPasswordSignUp.error = "Password is required"
+                binding.etPasswordSignUp.requestFocus()
+            }
+            !email.contains("@") -> {
+                binding.etEmailSignUp.error = "Email must be valid"
+                binding.etEmailSignUp.requestFocus()
+            }
+            password.length < 6 -> {
+                binding.etPasswordSignUp.error = "Password must be at least 6 characters"
+                binding.etPasswordSignUp.requestFocus()
+            }
+            else -> {
+                binding.loadingView.root.visibility = android.view.View.VISIBLE
+            }
+        }
+
+        val profileUpdates = userProfileChangeRequest {
+            displayName = binding.etUsername.text.toString()
+        }
+
+        user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                Log.d("update", "Update username")
+            }
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    binding.loadingView.root.visibility = android.view.View.GONE
+                    val username = binding.etUsername.text.toString()
+                    authViewModel.saveUserName(username)
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        R.string.sign_in_success,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@SignUpActivity, BottomNavigationActivity::class.java))
+                    finish()
+                } else {
+                    binding.loadingView.root.visibility = android.view.View.GONE
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        R.string.sign_in_failed,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100) {
+            val signInAccountTask: Task<GoogleSignInAccount> =
+                GoogleSignIn.getSignedInAccountFromIntent(data)
+            if (signInAccountTask.isSuccessful) {
+                // Initialize sign in account
+                try {
+                    // Initialize sign in account
+                    val googleSignInAccount = signInAccountTask.getResult(ApiException::class.java)
+                    // Check condition
+                    if (googleSignInAccount != null) {
+                        // When sign in account is not equal to null initialize auth credential
+                        val authCredential: AuthCredential = GoogleAuthProvider.getCredential(
+                            googleSignInAccount.idToken, null
+                        )
+                        // Check credential
+                        firebaseAuth.signInWithCredential(authCredential)
+                            .addOnCompleteListener(this) { task ->
+                                // Check condition
+                                if (task.isSuccessful) {
+                                    startActivity(
+                                        Intent(
+                                            this@SignUpActivity, BottomNavigationActivity::class.java
+                                        ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    )
+                                    Toast.makeText(
+                                        this@SignUpActivity,
+                                        R.string.sign_in_success,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        this@SignUpActivity,
+                                        R.string.sign_in_failed,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                    }
+                } catch (e: ApiException) {
+                    e.printStackTrace()
+                }
             }
         }
     }

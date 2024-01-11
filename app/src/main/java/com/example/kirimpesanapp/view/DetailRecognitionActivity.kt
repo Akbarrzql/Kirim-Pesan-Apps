@@ -17,7 +17,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivityDetailRecognitionBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.utils.setProgressDialog
 import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
@@ -46,7 +48,8 @@ class DetailRecognitionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = ThemePreferences.getInstance(application.dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
+        val authPref = AuthPreferences.getInstance(application.authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         textRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
 

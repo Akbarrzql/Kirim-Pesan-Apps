@@ -51,12 +51,21 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="true">
 
+
             <ImageView
                 android:id="@+id/iv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/ic_profile"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
                 android:src="@drawable/fi_rr_camera" />
+
+
 
         </androidx.cardview.widget.CardView>
 
@@ -90,7 +99,6 @@
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
                 android:inputType="textEmailAddress"
                 android:paddingStart="48dp"
                 android:textColorHint="@color/grey_hint"
@@ -128,8 +136,8 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
+                android:inputType="none"
+                android:enabled="false"
                 android:paddingStart="48dp"
                 android:textColorHint="@color/grey_hint"
                 android:textSize="14sp" />
@@ -139,7 +147,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

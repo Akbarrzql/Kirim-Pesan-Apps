@@ -10,7 +10,6 @@
     <string name="desc_signIn">Enter Your Account</string>
     <string name="desc_signUp">Create Your Account</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="menu">Menu</string>
     <string name="history">History</string>
     <string name="profile">Profile</string>
@@ -27,7 +26,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="please_wait">Is Recognizing Text</string>
-    <string name="no_image">Image not found</string>
+    <string name="please_wait_loading">Please Wait ~</string>
     <string name="regex1" translatable="false">\\+(\\d{2})?(\\d{10,12})</string>
     <string name="regex2" translatable="false">0?(\\d{9,12})</string>
     <string name="regex_3" translatable="false">0?(\\d{4})[-\\s]?(\\d{4})[-\\s]?(\\d{4})</string>
@@ -39,4 +38,11 @@
     <string name="copy">Copied successfully</string>
     <string name="tittle_dialog">Please Wait</string>
     <string name="empty_history">Data not found</string>
+    <string name="default_web_client_id">790546513312-e9crs5aukvgoano4geiqvo63nhlu2utu.apps.googleusercontent.com</string>
+    <string name="sign_in_success">Sign In Succes</string>
+    <string name="sign_in_failed">Sign In Failed</string>
+    <string name="error_message">Username cannot be empty</string>
+    <string name="profile_update">Profile updated successfully</string>
+    <string name="profile_update_failed">The profile was not updated successfully</string>
+    <string name="choose_image">Choose Image</string>
 </resources>

@@ -10,15 +10,21 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivityWelcomeBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWelcomeBinding
     private lateinit var themeViewModel: MainViewModel
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +32,25 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = ThemePreferences.getInstance(application.dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
+        val authPref = AuthPreferences.getInstance(application.authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
+        auth = Firebase.auth
 
         setUi()
         onClick()
         settingTheme()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this, BottomNavigationActivity::class.java))
+            finish()
+        }
     }
 
     private fun settingTheme() {

@@ -8,7 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivityBottomNavigationBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.view.fragment.HistoryFragment
 import com.example.kirimpesanapp.view.fragment.MenuFragment
@@ -29,7 +31,8 @@ class BottomNavigationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = ThemePreferences.getInstance(application.dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
+        val authPref = AuthPreferences.getInstance(application.authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         if (savedInstanceState != null) {
