@@ -20,7 +20,9 @@ import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.FragmentMenuBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.view.DetailRecognitionActivity
 import com.example.kirimpesanapp.view.ShowProfileActivity
@@ -46,7 +48,8 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val pref = ThemePreferences.getInstance(requireContext().dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
+        val authPref = AuthPreferences.getInstance(requireContext().authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         setUI()

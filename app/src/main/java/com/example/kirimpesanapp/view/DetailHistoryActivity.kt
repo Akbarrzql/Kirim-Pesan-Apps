@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.data.model.DataRecognition
 import com.example.kirimpesanapp.databinding.ActivityDetailHistoryBinding
+import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
+import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
@@ -32,7 +34,8 @@ class DetailHistoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = ThemePreferences.getInstance(application.dataStore)
-        val viewModelFactory = ViewModelFactory(pref)
+        val authPref = AuthPreferences.getInstance(application.authStore)
+        val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         dataRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
 

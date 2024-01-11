@@ -24,7 +24,7 @@
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="please_wait">Sedang menganalisa teks</string>
-    <string name="no_image">Tidak ada gambar</string>
+    <string name="please_wait_loading">Mohon Tunggu ~</string>
     <string name="logout">Keluar</string>
     <string name="logout_message">Anda yakin akan keluar?</string>
     <string name="language">Pengaturan Bahasa</string>
@@ -32,4 +32,10 @@
     <string name="copy">Berhasil disalin</string>
     <string name="tittle_dialog">Mohon Tunggu</string>
     <string name="empty_history">Tidak ada riwayat</string>
+    <string name="sign_in_success">"Berhasil Masuk"</string>
+    <string name="sign_in_failed">Gagal Masuk</string>
+    <string name="error_message">Username tidak boleh kosong</string>
+    <string name="profile_update">Profile berhasil diupdate</string>
+    <string name="profile_update_failed">Profile tidak berhasil diupdate</string>
+    <string name="choose_image">Pilih Gambar</string>
 </resources>

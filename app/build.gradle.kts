@@ -42,6 +42,8 @@ android {
                 "proguard-rules.pro"
             )
             resValue("string", "app_name", "KirimpesanApp")
+
+            buildConfigField("String", "web_client_id", "\"790546513312-e9crs5aukvgoano4geiqvo63nhlu2utu.apps.googleusercontent.com\"")
         }
         debug {
             isDebuggable = true
@@ -51,6 +53,8 @@ android {
                 "proguard-rules.pro"
             )
             resValue("string", "app_name", "KirimpesanAppDebug")
+
+            buildConfigField("String", "web_client_id", "\"790546513312-e9crs5aukvgoano4geiqvo63nhlu2utu.apps.googleusercontent.com\"")
         }
     }
     compileOptions {
@@ -83,6 +87,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-storage")
 
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -103,4 +110,10 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.0")
     implementation("androidx.room:room-paging:2.6.0")
     kapt("androidx.room:room-compiler:2.6.0")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    //refresh layout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }
