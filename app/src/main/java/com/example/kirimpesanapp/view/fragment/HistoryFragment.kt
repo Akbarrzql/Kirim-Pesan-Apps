@@ -1,6 +1,7 @@
 package com.example.kirimpesanapp.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,15 @@ import com.example.kirimpesanapp.view.adapter.HistoryAdapter
 import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var themeViewModel: MainViewModel
     private lateinit var dataRecognitionViewModel: DataRecognitionViewModel
@@ -42,6 +47,7 @@ class HistoryFragment : Fragment() {
         val authPref = AuthPreferences.getInstance(requireContext().authStore)
         val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        auth = Firebase.auth
 
         setUI()
         setRecyclerView()
@@ -79,8 +85,10 @@ class HistoryFragment : Fragment() {
     private fun setupViewModel() {
         dataRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
         dataRecognitionViewModel.readAllData.observe(viewLifecycleOwner) { dataRecognition ->
-            if (dataRecognition.isNotEmpty()) {
-                adapter.setData(dataRecognition)
+            val data = dataRecognition.filter { it.emailUser == auth.currentUser?.email }
+            Log.d("data name", data.toString())
+            if (dataRecognition.isNotEmpty() && data.isNotEmpty()) {
+                adapter.setData(data)
                 binding.llEmptyHistory.visibility = View.GONE
                 binding.rvHistory.visibility = View.VISIBLE
             } else {

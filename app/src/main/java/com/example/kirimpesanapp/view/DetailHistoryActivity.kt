@@ -85,6 +85,7 @@ class DetailHistoryActivity : AppCompatActivity() {
 
         val isNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
         val id = intent.getIntExtra("id", 0)
+        val nameUser = intent.getStringExtra("emailUser")
         val phoneNumber = intent.getStringExtra("phoneNumber")
         val dateRecognition = intent.getStringExtra("dateRecognition")
         val image = intent.getStringExtra("image")
@@ -99,7 +100,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             mtDetailHistory.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.delete -> {
-                        val dataRecognition = DataRecognition(id, phoneNumber!!, dateRecognition!!, image!!)
+                        val dataRecognition = DataRecognition(id, nameUser.toString() ,phoneNumber!!, dateRecognition!!, image!!)
                         dataRecognitionViewModel.deleteShortcut(dataRecognition)
                         Toast.makeText(this@DetailHistoryActivity, "Data berhasil dihapus", Toast.LENGTH_SHORT).show()
                         onBackPressedDispatcher.onBackPressed()

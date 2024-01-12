@@ -8,6 +8,7 @@
     <string name="email">Email</string>
     <string name="password">Kata Sandi</string>
     <string name="login_by_google">Masuk dengan Google</string>
+    <string name="help_support">Pusat Bantuan</string>
     <string name="desc_signIn">Masukkan Akun Anda</string>
     <string name="desc_signUp">Buat akun anda</string>
     <string name="menu">Beranda</string>
@@ -38,4 +39,15 @@
     <string name="profile_update">Profile berhasil diupdate</string>
     <string name="profile_update_failed">Profile tidak berhasil diupdate</string>
     <string name="choose_image">Pilih Gambar</string>
+    <string name="change_password">Ganti Password</string>
+    <string name="bug_report">Laporkan Masalah Aplikasi</string>
+    <string name="send_email">Kirim Email</string>
+    <string name="send_bug">Kirim Laporan Masalah</string>
+    <string name="desc_change_password">Masukkan email yang terkait dengan akun anda dan kami akan mengirimkan email dengan instruksi untuk mengatur ulang kata sandi.</string>
+    <string name="desc_bug_report">Laporkan masalah anda yang terkait dengan akun atau aplikasi anda dan kami akan menindak lanjuti mengenai permasalahan anda saat ini dan memperbaiki masalah.</string>
+    <string name="forgot_password">Lupa Kata Sandi?</string>
+    <string name="email_sent">Email Terkirim</string>
+    <string name="desc_report_bug">Laporan Masalah</string>
+    <string name="thank_you_bug">Laporan telah terkirim, terima kasih atas saran dan masukan anda.</string>
+    <string name="empty_bug_report">Harap mengisi laporan masalah</string>
 </resources>

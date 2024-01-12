@@ -5,12 +5,9 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.data.model.DataRecognition
@@ -36,8 +33,6 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        viewModel =
-            ViewModelProvider(holder.itemView.context as FragmentActivity)[DataRecognitionViewModel::class.java]
         val currentItem = dataRecognition[position]
         val isNightMode =
             holder.itemView.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
@@ -74,6 +69,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailHistoryActivity::class.java)
             intent.putExtra("id", currentItem.id)
+            intent.putExtra("emailUser", currentItem.emailUser)
             intent.putExtra("phoneNumber", currentItem.phoneNumber)
             intent.putExtra("dateRecognition", currentItem.dateRecognition)
             intent.putExtra("image", currentItem.imageUri)

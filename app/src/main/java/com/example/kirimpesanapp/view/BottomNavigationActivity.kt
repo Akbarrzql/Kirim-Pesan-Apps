@@ -4,7 +4,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
 import com.example.kirimpesanapp.R
 import com.example.kirimpesanapp.databinding.ActivityBottomNavigationBinding
@@ -18,6 +20,8 @@ import com.example.kirimpesanapp.view.fragment.ProfileFragment
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ThemeViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 
 class BottomNavigationActivity : AppCompatActivity() {
 
@@ -45,6 +49,14 @@ class BottomNavigationActivity : AppCompatActivity() {
             selectedItemId = it.itemId
             setCurrentFragment(it.itemId)
             true
+        }
+
+        binding.bottomNavigation.menu.forEach {
+            val view = binding.bottomNavigation.findViewById<BottomNavigationItemView>(it.itemId)
+            view.setOnLongClickListener {
+                TooltipCompat.setTooltipText(view, null)
+                true
+            }
         }
 
         setUI()
@@ -86,4 +98,5 @@ class BottomNavigationActivity : AppCompatActivity() {
             commit()
         }
     }
+
 }

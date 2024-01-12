@@ -26,6 +26,7 @@ import com.example.kirimpesanapp.preferences.AuthPreferences
 import com.example.kirimpesanapp.preferences.ThemePreferences
 import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
+import com.example.kirimpesanapp.view.HelpSupportActivity
 import com.example.kirimpesanapp.view.ShowProfileActivity
 import com.example.kirimpesanapp.view.WelcomeActivity
 import com.example.kirimpesanapp.viewmodel.AuthViewModel
@@ -112,7 +113,7 @@ class ProfileFragment : Fragment() {
                 startActivity(Intent(requireContext(), ShowProfileActivity::class.java))
             }
             helpSupport.setOnClickListener {
-                Toast.makeText(requireContext(), "Help & Support \n(Comming Soon)", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(requireContext(), HelpSupportActivity::class.java))
             }
             logout.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())

@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class DataRecognition(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val emailUser: String,
     val phoneNumber: String,
     val dateRecognition: String,
     val imageUri: String
