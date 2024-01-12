@@ -19,7 +19,7 @@
     <string name="delete">Delete</string>
     <string name="name" translatable="false">Jhon Doe</string>
     <string name="show_profile">Show Profile</string>
-    <string name="help_support" translatable="false"><![CDATA[Help & Support]]></string>
+    <string name="help_support">Help &amp; Support></string>
     <string name="dark_mode">Dark Mode</string>
     <string name="your_name">Your Name</string>
     <string name="your_email">Your Email</string>
@@ -45,4 +45,15 @@
     <string name="profile_update">Profile updated successfully</string>
     <string name="profile_update_failed">The profile was not updated successfully</string>
     <string name="choose_image">Choose Image</string>
+    <string name="change_password">Change Password</string>
+    <string name="bug_report">Bug Report</string>
+    <string name="send_email">Send Email</string>
+    <string name="send_bug">Send Bug Report</string>
+    <string name="desc_change_password">Enter the email associated with your account and we\'ll send you an email with instructions for resetting your password.</string>
+    <string name="desc_bug_report">Report your problem related to your account or application and we will follow up regarding your current problem and fix the problem.</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="email_sent">Email Sent</string>
+    <string name="desc_report_bug">Bug Report</string>
+    <string name="thank_you_bug">The report has been sent, thank you for your suggestions and input.</string>
+    <string name="empty_bug_report">Please fill out a bug report</string>
 </resources>

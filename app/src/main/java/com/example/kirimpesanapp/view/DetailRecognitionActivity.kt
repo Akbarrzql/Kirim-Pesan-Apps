@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,9 +23,13 @@ import com.example.kirimpesanapp.preferences.ThemePreferences
 import com.example.kirimpesanapp.preferences.authStore
 import com.example.kirimpesanapp.preferences.dataStore
 import com.example.kirimpesanapp.utils.setProgressDialog
+import com.example.kirimpesanapp.viewmodel.AuthViewModel
 import com.example.kirimpesanapp.viewmodel.DataRecognitionViewModel
 import com.example.kirimpesanapp.viewmodel.MainViewModel
 import com.example.kirimpesanapp.viewmodel.ViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -35,6 +40,10 @@ class DetailRecognitionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailRecognitionBinding
     private lateinit var themeViewModel: MainViewModel
     private lateinit var textRecognitionViewModel: DataRecognitionViewModel
+    private lateinit var authViewModel: AuthViewModel
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var emailUser: String
 
     //text recognizer
     private var imageUri: Uri? = null
@@ -51,10 +60,16 @@ class DetailRecognitionActivity : AppCompatActivity() {
         val authPref = AuthPreferences.getInstance(application.authStore)
         val viewModelFactory = ViewModelFactory(pref, authPref)
         themeViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        authViewModel = ViewModelProvider(this, viewModelFactory)[AuthViewModel::class.java]
         textRecognitionViewModel = ViewModelProvider(this)[DataRecognitionViewModel::class.java]
+        auth = Firebase.auth
+        emailUser = auth.currentUser?.email.toString()
+
 
         //init text recognizer
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
+        Log.d("nameUser", emailUser)
 
         initUI()
         setUI()
@@ -139,7 +154,8 @@ class DetailRecognitionActivity : AppCompatActivity() {
     private fun insertToDatabase(formattedText: String) {
         val date = java.text.SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.getDefault()).format(java.util.Date())
         val imageUri = imageUri.toString()
-        val dataRecognition = com.example.kirimpesanapp.data.model.DataRecognition(0, formattedText, date, imageUri)
+        val dataRecognition = com.example.kirimpesanapp.data.model.DataRecognition(0, emailUser, formattedText, date, imageUri)
+        Log.d("dataRecognition", dataRecognition.toString())
         textRecognitionViewModel.insertDataRecognition(dataRecognition)
     }
 
