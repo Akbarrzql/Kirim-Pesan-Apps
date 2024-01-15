@@ -19,7 +19,7 @@
     <string name="delete">Delete</string>
     <string name="name" translatable="false">Jhon Doe</string>
     <string name="show_profile">Show Profile</string>
-    <string name="help_support">Help &amp; Support></string>
+    <string name="help_support">Help &amp; Support</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="your_name">Your Name</string>
     <string name="your_email">Your Email</string>

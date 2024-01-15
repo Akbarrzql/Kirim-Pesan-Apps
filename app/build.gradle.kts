@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.kirimpesanapp"
+    namespace = "com.app.kirimpesanapp"
     compileSdk = 34
 
     flavorDimensions += "version"
     productFlavors {
         create("production") {
-            applicationId = "com.example.kirimpesanapp"
+            applicationId = "com.app.kirimpesanapp"
             minSdk = 26
             targetSdk = 34
             versionCode = 1
@@ -23,7 +23,7 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
         create("staging") {
-            applicationId = "com.example.kirimpesanapp"
+            applicationId = "com.app.kirimpesanapp"
             minSdk = 26
             targetSdk = 34
             versionCode = 1
@@ -41,9 +41,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            resValue("string", "app_name", "KirimpesanApp")
+            resValue("string", "app_name", "Kirim Pesan")
 
-            buildConfigField("String", "web_client_id", "\"790546513312-e9crs5aukvgoano4geiqvo63nhlu2utu.apps.googleusercontent.com\"")
+            buildConfigField("String", "web_client_id", "\"912815326166-959f7igb4dauols6jespn89eikmj6k7m.apps.googleusercontent.com\"")
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isDebuggable = true
@@ -54,7 +55,7 @@ android {
             )
             resValue("string", "app_name", "KirimpesanAppDebug")
 
-            buildConfigField("String", "web_client_id", "\"790546513312-e9crs5aukvgoano4geiqvo63nhlu2utu.apps.googleusercontent.com\"")
+            buildConfigField("String", "web_client_id", "\"912815326166-959f7igb4dauols6jespn89eikmj6k7m.apps.googleusercontent.com\"")
         }
     }
     compileOptions {
@@ -90,6 +91,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-appdistribution-api-ktx:16.0.0-beta11")
 
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
