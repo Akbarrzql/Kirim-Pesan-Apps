@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("kotlin-kapt")
+    id("io.gitlab.arturbosch.detekt").version("1.23.3")
 }
 
 android {
@@ -67,8 +68,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-    }
-    buildFeatures {
         buildConfig = true
     }
 }
@@ -92,7 +91,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-appdistribution-api-ktx:16.0.0-beta11")
+    implementation("com.google.firebase:firebase-appdistribution-api-ktx:16.0.0-beta11")    
 
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")

@@ -24,34 +24,34 @@
         android:theme="@style/Theme.KirimPesanApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.BugReportActivity"
+            android:name=".view.profile.settings.BugReportActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ChangePasswordActivity"
+            android:name=".view.profile.settings.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".view.HelpSupportActivity"
+            android:name=".view.profile.settings.HelpSupportActivity"
             android:exported="false" />
         <activity
-            android:name=".view.DetailRecognitionActivity"
+            android:name=".view.home.DetailRecognitionActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ShowProfileActivity"
+            android:name=".view.profile.ShowProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.DetailHistoryActivity"
+            android:name=".view.history.DetailHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.BottomNavigationActivity"
+            android:name=".view.bottom_navigation.BottomNavigationActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignUpActivity"
+            android:name=".view.auth.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignInActivity"
+            android:name=".view.auth.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".view.WelcomeActivity"
+            android:name=".view.auth.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

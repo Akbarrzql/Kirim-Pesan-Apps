@@ -3,7 +3,6 @@ package com.app.kirimpesanapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.app.kirimpesanapp.databinding.ActivityMainBinding
-import com.app.kirimpesanapp.view.BugReportActivity
 import com.google.firebase.appdistribution.InterruptionLevel
 import com.google.firebase.appdistribution.ktx.appDistribution
 import com.google.firebase.ktx.Firebase

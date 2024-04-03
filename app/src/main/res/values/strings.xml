@@ -54,6 +54,7 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="email_sent">Email Sent</string>
     <string name="desc_report_bug">Bug Report</string>
-    <string name="thank_you_bug">The report has been sent, thank you for your suggestions and input.</string>
-    <string name="empty_bug_report">Please fill out a bug report</string>
+    <string name="provide_feedback">Provide Feedback</string>
+    <string name="feedback">Feedback</string>
+    <string name="desc_feedback">Do you want to provide feedback to the developer?</string>
 </resources>

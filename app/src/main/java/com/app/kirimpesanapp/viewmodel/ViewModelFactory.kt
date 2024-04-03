@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.kirimpesanapp.preferences.AuthPreferences
 import com.app.kirimpesanapp.preferences.ThemePreferences
+import com.app.kirimpesanapp.viewmodel.auth.AuthViewModel
+import com.app.kirimpesanapp.viewmodel.theme.ThemeViewModel
 
 class ViewModelFactory(private val pref: ThemePreferences, private val authPref: AuthPreferences) : ViewModelProvider.NewInstanceFactory() {
 

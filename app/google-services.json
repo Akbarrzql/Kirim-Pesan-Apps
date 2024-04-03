@@ -12,7 +12,20 @@
           "package_name": "com.app.kirimpesanapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "912815326166-dakb61loume8tp59m28va7726dlvfhn2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.kirimpesanapp",
+            "certificate_hash": "1bec789e0bf747b007846cfe18476f30087c1a99"
+          }
+        },
+        {
+          "client_id": "912815326166-959f7igb4dauols6jespn89eikmj6k7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA4C2OjIhxstMEkpdO7vLwYsvtsWrC5Spw"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912815326166-959f7igb4dauols6jespn89eikmj6k7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

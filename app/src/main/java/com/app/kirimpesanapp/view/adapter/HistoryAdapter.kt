@@ -10,10 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kirimpesanapp.R
-import com.app.kirimpesanapp.data.model.DataRecognition
+import com.app.kirimpesanapp.source.model.DataRecognition
 import com.app.kirimpesanapp.databinding.ItemListHistoryBinding
-import com.app.kirimpesanapp.view.DetailHistoryActivity
-import com.app.kirimpesanapp.viewmodel.DataRecognitionViewModel
+import com.app.kirimpesanapp.view.history.DetailHistoryActivity
+import com.app.kirimpesanapp.viewmodel.data_recognition.DataRecognitionViewModel
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
