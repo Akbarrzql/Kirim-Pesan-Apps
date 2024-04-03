@@ -48,6 +48,7 @@
     <string name="forgot_password">Lupa Kata Sandi?</string>
     <string name="email_sent">Email Terkirim</string>
     <string name="desc_report_bug">Laporan Masalah</string>
-    <string name="thank_you_bug">Laporan telah terkirim, terima kasih atas saran dan masukan anda.</string>
-    <string name="empty_bug_report">Harap mengisi laporan masalah</string>
+    <string name="provide_feedback">Berikan Feedback</string>
+    <string name="feedback">Feedback</string>
+    <string name="desc_feedback">Apakah anda ingin memberikan feedback kepada developer?</string>
 </resources>

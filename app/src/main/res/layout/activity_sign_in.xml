@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SignInActivity"
+    tools:context=".view.auth.SignInActivity"
     android:background="@color/white"
     android:id="@+id/cl_signIn">
 
@@ -125,7 +125,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                tools:ignore="UseCompoundDrawables,UselessParent">
 
                 <ImageView
                     android:layout_width="wrap_content"
