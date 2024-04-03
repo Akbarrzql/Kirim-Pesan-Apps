@@ -4,7 +4,6 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("kotlin-kapt")
-    id("io.gitlab.arturbosch.detekt").version("1.23.3")
 }
 
 android {
